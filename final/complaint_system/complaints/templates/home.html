@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grievance Redressal Portal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        
+        .right {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+        header {
+            background-color: #fff;
+            padding: 10px 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header-left img {
+            width: 50px;
+            height: auto;
+        }
+
+        .header-right a {
+            text-decoration: none;
+            color: #333;
+            margin-left: 15px;
+            font-weight: bold;
+        }
+
+        .main-header {
+            background-color: #f0f0f0;
+            text-align: center;
+            padding: 20px;
+        }
+        /* New styles for image slider */
+        .slider {
+            width: 300px;
+            height: 150px;
+            overflow: hidden;
+            border: 2px solid #ccc;
+            position: relative;
+        }
+
+        .slider img {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .slider img.active {
+            opacity: 1;
+        }
+
+        /* For the second slider */
+        .slider-two {
+            width: 1300px;
+            height: 150px;
+            overflow: hidden;
+            border: 2px solid #ccc;
+            position: relative;
+        }
+
+        .slider-two img {
+            width: 1300px;
+            height: 150px;
+            position: absolute;
+            top: 100%%;
+            left: 0;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+        }
+
+        .slider-two img.active {
+            opacity: 1;
+        }
+
+        /* Add necessary spacing */
+        .sliders-container {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
+
+        .main-header img {
+            height: 80px;
+            width: auto;
+            margin-bottom: 10px;
+        }
+        .main-header h1 {
+            margin: 10px 0;
+        }
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 10px;
+            background-color: #ffcc00;
+            border-top: 2px solid #f9b500;
+            border-bottom: 2px solid #f9b500;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-size: 1rem;
+        }
+        .options {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        .options div {
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 150px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .options div:hover {
+            background-color: #e0e0e0;
+        }
+        .options img {
+            width: 50px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+        .minister-section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            background-color: #e6e6e6;
+            padding: 40px;
+        }
+        .minister-card {
+            text-align: center;
+            width: 160px;
+            margin: 10px;
+        }
+        .minister-card img {
+            border-radius: 50%;
+            width: 90px;
+            height: 90px;
+            margin-bottom: 15px;
+        }
+        .footer {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            margin-top: 30px;
+            box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
+        }
+        .lang-btn {
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            color: #333;
+            padding: 8px 15px;
+            margin-left: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+    
+        .lang-btn:hover {
+            background-color: #e0e0e0;
+        }
+        .lang-btn {
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            color: #333;
+            padding: 8px 15px;
+            margin-left: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+    
+        .lang-btn:hover {
+            background-color: #e0e0e0;
+        }
+    </style>
+    
+    <script>
+        function changeLanguage(language) {
+            const elements = {
+                title: document.getElementById('title'),
+                ministry: document.getElementById('ministry'),
+                postGrievanceText: document.getElementById('post-grievance-text'),
+                trackStatusText: document.getElementById('track-status-text'),
+                sendReminderText: document.getElementById('send-reminder-text'),
+                footerText: document.getElementById('footer-text'),
+                helpline: document.getElementById('helpline'),
+                navCitizenReg: document.getElementById('citizen-reg'),
+                navCitizenLogin: document.getElementById('citizen-login'),
+                navOfficerLogin: document.getElementById('officer-login'),
+                navTrackGrievance: document.getElementById('track-grievance'),
+                minister1: document.querySelector('.minister-card:nth-child(1) p:nth-child(2)'),
+                minister2: document.querySelector('.minister-card:nth-child(2) p:nth-child(2)'),
+                minister3: document.querySelector('.minister-card:nth-child(3) p:nth-child(2)')
+            };
+
+            if (language === 'en') {
+                elements.title.textContent = 'GRIEVANCE REDRESSAL PORTAL';
+                elements.ministry.textContent = 'Ministry of Railways';
+                elements.postGrievanceText.textContent = 'Post Grievance';
+                elements.trackStatusText.textContent = 'Track Grievance Status';
+                elements.sendReminderText.textContent = 'Send Reminder';
+                elements.footerText.textContent = '© Government of India';
+                elements.helpline.textContent = 'Helpline: 139 (Toll-Free)';
+                elements.navCitizenReg.textContent = '| Citizen Registration |';
+                elements.navCitizenLogin.textContent = '| Citizen Login |';
+                elements.navOfficerLogin.textContent = '| Officer Login |';
+                elements.navTrackGrievance.textContent = '| Track Grievance |';
+                elements.minister1.textContent = "Shri. Narendra Modi";
+                elements.minister2.textContent = "Honorable Prime Minister";
+                elements.minister3.textContent = "Shri. Ashwini Vaishnav";
+                elements.minister4.textContent = "Honorable Railway Minister";
+                elements.minister5.textContent = "Shri. V. Somanna";
+                elements.minister6.textContent = "Honorable Minister of  State";
+
+            } else if (language === 'hi') {
+                elements.title.textContent = 'शिकायत निवारण पोर्टल';
+                elements.ministry.textContent = 'रेल मंत्रालय';
+                elements.postGrievanceText.textContent = 'शिकायत दर्ज करें';
+                elements.trackStatusText.textContent = 'शिकायत स्थिति ट्रैक करें';
+                elements.sendReminderText.textContent = 'याद दिलाएं';
+                elements.footerText.textContent = '© भारत सरकार';
+                elements.helpline.textContent = 'हेल्पलाइन: 139 (टोल-फ्री)';
+                elements.navCitizenReg.textContent = '| नागरिक पंजीकरण |';
+                elements.navCitizenLogin.textContent = '| नागरिक लॉगिन |';
+                elements.navOfficerLogin.textContent = '| अधिकारी लॉगिन |';
+                elements.navTrackGrievance.textContent = '| शिकायत ट्रैक करें |';
+                elements.minister1.textContent = "श्री नरेंद्र मोदी";
+                elements.minister2.textContent = "माननीय प्रधानमंत्री";
+                elements.minister3.textContent = "श्री अश्विनी वैष्णव";
+                elements.minister4.textContent = "माननीय रेलवे मंत्री";
+                elements.minister5.textContent = "श्री वी. सोमन्ना";
+                elements.minister6.textContent = "माननीय राज्य मंत्री";
+            }
+        }
+
+         // JavaScript for the first slider
+         let currentSlide = 0;
+         let images;
+ 
+         window.onload = function () {
+             images = document.querySelectorAll('.slider img');
+             images[currentSlide].classList.add('active');
+             setInterval(slideImages, 2000);
+         }
+ 
+         function slideImages() {
+             images[currentSlide].classList.remove('active');
+             currentSlide = (currentSlide + 1) % images.length;
+             images[currentSlide].classList.add('active');
+         }
+ 
+         // JavaScript for the second slider
+         let currentSlideTwo = 0;
+         let imagesTwo;
+ 
+         window.onload = function () {
+             imagesTwo = document.querySelectorAll('.slider-two img');
+             imagesTwo[currentSlideTwo].classList.add('active');
+             setInterval(slideImagesTwo, 2000);
+         }
+ 
+         function slideImagesTwo() {
+             imagesTwo[currentSlideTwo].classList.remove('active');
+             currentSlideTwo = (currentSlideTwo + 1) % imagesTwo.length;
+             imagesTwo[currentSlideTwo].classList.add('active');
+         }
+    </script>
+</head>
+<body>
+    <div class="right">
+        <button class="lang-btn" onclick="changeLanguage('en')">English</button>
+        <button class="lang-btn" onclick="changeLanguage('hi')">हिन्दी</button>
+    </div>
+    <header>
+        <div class="header-left">
+            <img src="https://t4.ftcdn.net/jpg/05/18/35/41/360_F_518354199_t3WVv6zkDC9nuGi9v2T9kMPUuG41G5nQ.jpg" 
+                alt="train" 
+                style="width: 800px; height: 100px; margin-right: 110px;">
+            <img src="https://logos-download.com/wp-content/uploads/2019/11/Indian_Railway_Logo_1.png" 
+                alt="Indian Railways" 
+                style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
+        </div>
+        <div class="header-right">
+            <img src="https://uxdt.nic.in/wp-content/uploads/2020/01/NE_Preview1.png?x69772"
+            alt="National Emblem" style="width: 180px; height: 110px;">
+        </div>
+    </header>
+<section class="main-header">
+    <h1 id="title">GRIEVANCE REDRESSAL PORTAL</h1>
+    <p id="ministry">Ministry of Railways</p>
+    <div class="slider-two">
+        <img src="https://t3.ftcdn.net/jpg/04/54/72/12/360_F_454721218_G91nkzBRgx3gqLmXIV9QWa1opYel9DYH.jpg"
+         alt="Train 4" style="width: 1300px; height: 150px;">
+        <img src="https://businessindia.co/media/general/vande-bharat-express.1_opt.large.jpeg"
+         alt="Train 5" style="width: 1300px; height: 150px;">
+        <img src="https://static.toiimg.com/thumb/msid-109333959,width-400,resizemode-4/109333959.jpg" 
+        alt="Train 6" style="width: 1300px; height: 150px;">
+    </div>
+</section>
+
+   
+<nav class="nav-links">
+    <a id="citizen-reg" href="register/" onclick="navigateTo('citizen_register')">| Citizen Registration |</a>
+    
+    <a id="admin_dashboard" href="admin_dashboard" onclick="navigateTo('admin_dashboard')">| Officer Login |</a>
+    <a id="track-grievance" href="track_grievance" onclick="navigateTo('track_grievance')" >| Track Grievance |</a>
+    <a id="feedback" href="feedback" onclick="navigateTo('feedback')" >| Feedback Form |</a>
+
+</nav>
+
+<nav class="options">
+   
+        <div><a id="submit_complaint" href="submit_complaint" onclick="navigateTo('submit_complaint')">click</a>
+        <img src="https://thumbs.dreamstime.com/b/icon-complaint-grievance-complaint-316716992.jpg">
+        <p id="post-grievance-text">Post Grievance</p>
+    </div>
+    <div><a id="track-grievance" href="{% url 'track_complaint' %}">| Track Complaint |</a>
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdk4ZIKVdQaMMj390S19JlqK-mHrbpgs6-gA&s">
+        <p id="track-status-text">Track Grievance Status</p>
+    </div>
+    <div id="send-reminder" onclick="navigateTo('send-reminder.html')">
+        <img src="https://cdn-icons-png.freepik.com/512/8295/8295212.png" alt="Send Reminder">
+        <p id="send-reminder-text">Send Reminder</p>
+    </div>
+</nav>
+
+<section class="minister-section">
+    <div class="minister-card">
+        <img src="https://etimg.etb2bimg.com/photo/96493840.cms" 
+        alt="Narendra Modi">
+        <p>Shri. Narendra Modi</p>
+        <p>Honorable Prime Minister</p>
+    </div>
+    <div class="minister-card">
+        <img src="https://cdn.zeebiz.com/sites/default/files/2022/01/11/172414-railway-minister.jpg" 
+        alt="Ashwini Vaishnav">
+        <p>Shri. Ashwini Vaishnav</p>
+        <p>Honorable Railway Minister</p>
+    </div>
+    <div class="minister-card">
+        <img src="https://images.news18.com/ibnlive/uploads/2024/06/your-paragraph-text-2024-06-9a06fbe342148c79ea1bf254a08b0d8e.jpg?impolicy=website&width=640&height=480" 
+        alt="V. Somanna">
+        <p>Shri. V. Somanna</p>
+        <p>Honorable Minister of Krnataka State</p>
+    </div>
+</section>
+
+<footer class="footer">
+    <p id="footer-text">© Government of India</p>
+    <p id="helpline">Helpline: 139 (Toll-Free)</p>
+</footer>
+</body>
+</html>
