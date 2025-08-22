@@ -1,0 +1,69 @@
+<!-- templates/view_complaint.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaint Detail</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .complaint-detail {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        p {
+            margin: 10px 0;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        .back-button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="complaint-container">
+        <h2>Complaint Details</h2>
+        <div class="complaint-details">
+            <p><strong>Name:</strong> {{ complaint.name }}</p>
+            <p><strong>Email:</strong> {{ complaint.email }}</p>
+            <p><strong>Complaint:</strong> {{ complaint.complaint_text }}</p>
+            <p><strong>PNR Number:</strong> {{ complaint.pnr_number }}</p>  <!-- New field -->
+            <p><strong>Sentiment:</strong> {{ complaint.sentiment }}</p>
+            <p><strong>Image Classification:</strong> {{ complaint.image_classification }}</p>
+            <p><strong>Date:</strong> {{ complaint.created_at }}</p>
+            <a href="{% url 'admin_dashboard' %}" class="back-button">Back to Dashboard</a>
+        </div>
+    </div>
+   
+</body>
+</html>
